@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Voting.Areas.Identity.Models.ViewModels
 {
-    public class LoginViewModel
+    public class AdminLoginViewModel
     {
-        [Required]
-        public string StudentId { get; set; }
-        [Required]
-        public string UserName { get; set; }
-        [Required]
+        public string AdminId { get; set; }
+
+        public string Username { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

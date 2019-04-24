@@ -12,7 +12,7 @@ namespace Voting.Models
         public int Id { get; set; }
         [Timestamp]
         public byte[] TimeStamp { get; set; }
-        [MaxLength(20),DataType(DataType.Text)]
+        [MaxLength(20),DataType(DataType.Text),Display(Name ="Candidate Name")]
         public string CandidateName { get; set; }
         [DataType(DataType.Date)]
         public DateTime Year { get; set; }
@@ -20,8 +20,5 @@ namespace Voting.Models
         public Category Category { get; set; }
         [DataType(DataType.ImageUrl)]
         public string Photo { get; set; }
-
-
-
     }
 }

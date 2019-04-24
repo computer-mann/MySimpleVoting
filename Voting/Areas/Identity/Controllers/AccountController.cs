@@ -42,6 +42,11 @@ namespace Voting.Areas.Identity.Controllers
             {
                 if (user.StudentId == model.StudentId)
                 {
+                    if(!await userManager.IsInRoleAsync(user, "Student"))
+                    {
+                        ModelState.AddModelError("", "Only Students Can Vote");
+                        return View(model);
+                    }
                     var result =await signinManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
                     {

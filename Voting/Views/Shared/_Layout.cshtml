@@ -28,14 +28,20 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+                        @if (User.IsInRole("Admin"))
+                        {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Candidates" asp-action="List">Candidates</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="List">Categories</a>
                         </li>
+                        }
                         <li class="nav-item float-right">
+                            @if (User.Identity.IsAuthenticated)
+                            {
                             <a class="nav-link text-info" asp-area="Identity" asp-controller="Account" asp-action="Logout">Logout</a>
+                            }
                         </li>
                     </ul>
                 </div>
@@ -51,7 +57,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - Voting - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - Voting 
         </div>
     </footer>
 

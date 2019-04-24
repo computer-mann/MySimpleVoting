@@ -83,13 +83,10 @@ namespace Voting
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-         //   app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //  app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseMvc(routes =>
             {
@@ -102,7 +99,9 @@ namespace Voting
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-           // Task.Run(() => SeedData.InitializeStudents(app.ApplicationServices.CreateScope().ServiceProvider));
+            // Task.Run(() => SeedData.InitializeStudents(app.ApplicationServices.CreateScope().ServiceProvider));
+            //  Task.Run(() => SeedData.InitializeStudentRoles(app.ApplicationServices.CreateScope().ServiceProvider));
+          //  Task.Run(() => SeedData.InitializeAdmins(app.ApplicationServices.CreateScope().ServiceProvider));
         }
     }
 }

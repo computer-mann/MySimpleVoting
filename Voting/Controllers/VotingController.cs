@@ -8,7 +8,7 @@ using Voting.Models.DbContexts;
 
 namespace Voting.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Student")]
     public class VotingController : Controller
     {
         public ElectionDbContext  Election { get; set; }
@@ -16,8 +16,10 @@ namespace Voting.Controllers
         {
             Election = electionDbContext;
         }
+        [HttpGet]
         public IActionResult Index()
         {
+
             return View();
         }
     }

@@ -10,8 +10,9 @@ namespace Voting.Models
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(30)]
+        [MaxLength(60),Display(Name ="Category Name")]
         public string CategoryName { get; set; }
+        public List<Candidate> Candidates { get; set; }
         [Timestamp]
         public byte[] TimeSamp { get; set; }
     }

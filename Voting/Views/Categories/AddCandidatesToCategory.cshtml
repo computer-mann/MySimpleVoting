@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Voting.Models.Candidate>
+
+@{
+    ViewData["Title"] = "Add Candidates To Category";
+}
+
+<h1>Add Candidates To Category</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CandidateName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.CandidateName)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Photo)
+            </td>
+            <td>
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
