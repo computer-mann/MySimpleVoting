@@ -37,7 +37,7 @@ namespace Voting
             //    options.CheckConsentNeeded = context => true;
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
-
+            services.AddHttpContextAccessor();
             services.AddIdentity<Student, IdentityRole>().
                 AddEntityFrameworkStores<StudentDbContext>().AddDefaultTokenProviders();
 
@@ -67,7 +67,7 @@ namespace Voting
                 options.LogoutPath = "/auth/account/logout";
                 options.Cookie.Name = "adfghjprince";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -96,12 +96,17 @@ namespace Voting
                     template: "auth/{controller}/{action}"
                     );
                 routes.MapRoute(
+                    name: "Custom",
+                    template: "admin/{controller=Categories}/{action=Details}/{catId?}"
+                    );
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             // Task.Run(() => SeedData.InitializeStudents(app.ApplicationServices.CreateScope().ServiceProvider));
             //  Task.Run(() => SeedData.InitializeStudentRoles(app.ApplicationServices.CreateScope().ServiceProvider));
-          //  Task.Run(() => SeedData.InitializeAdmins(app.ApplicationServices.CreateScope().ServiceProvider));
+            //  Task.Run(() => SeedData.InitializeAdmins(app.ApplicationServices.CreateScope().ServiceProvider));
+            //Task.Run(() => Voting.Models.Data.SeedData.InitializeVoteParams(app.ApplicationServices.CreateScope().ServiceProvider));
         }
     }
 }

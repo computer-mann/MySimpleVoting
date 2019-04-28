@@ -4,36 +4,43 @@
     ViewData["Title"] = "Add Candidates To Category";
 }
 
-<h1>Add Candidates To Category</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CandidateName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    @Html.DisplayFor(modelItem => item.CandidateName)
+<h1>Add Candidates To  @ViewBag.CName Category</h1>
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Photo)
-            </td>
-            <td>
-            </td>
-
-        </tr>
+@if (Model.Count()==0)
+{
+    <br /><br /><hr />
+    <h1>No UnAssigned Candidate</h1>
 }
-    </tbody>
-</table>
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CandidateName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Photo)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.CandidateName)
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Photo)
+    </td>
+    <td>
+        <a asp-action="Confirm" asp-route-canId="@item.CanId" asp-route-catId="@ViewBag.CatId">Add</a>
+    </td>
+</tr>
+}
+        </tbody>
+    </table>
+
+}

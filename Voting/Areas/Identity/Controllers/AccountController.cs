@@ -50,7 +50,7 @@ namespace Voting.Areas.Identity.Controllers
                     var result =await signinManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return Redirect(returnUrl ?? "/");
+                        return Redirect("~/voting/index");
                      
                     }
                 }

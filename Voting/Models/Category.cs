@@ -9,7 +9,7 @@ namespace Voting.Models
     public class Category
     {
         [Key]
-        public int Id { get; set; }
+        public int CatId { get; set; }
         [MaxLength(60),Display(Name ="Category Name")]
         public string CategoryName { get; set; }
         public List<Candidate> Candidates { get; set; }

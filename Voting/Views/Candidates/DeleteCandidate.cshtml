@@ -26,7 +26,10 @@
     </dl>
     
     <form asp-action="DeleteCandidate">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CanId" />
+        <input type="hidden" asp-for="CandidateName" />
+        <input type="hidden" asp-for="Category" />
+        <input type="hidden" asp-for="Year" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

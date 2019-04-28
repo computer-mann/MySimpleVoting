@@ -1,19 +1,20 @@
 ﻿@model IEnumerable<Voting.Models.Candidate>
 
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Vote";
 }
 
-<h1>All Candidates</h1>
+<h1>Vote</h1>
 
-<p>
-    <a asp-action="CreateCandidate">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
+           
             <th>
                 @Html.DisplayNameFor(model => model.CandidateName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
             </th>
             <th></th>
         </tr>
@@ -21,13 +22,16 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.CandidateName)
             </td>
+           
             <td>
-                <a asp-action="EditCandidate" asp-route-canId="@item.CanId">Edit</a> |
-                <a asp-action="Details" asp-route-canId="@item.CanId">Details</a> |
-                <a asp-action="DeleteCandidate" asp-route-canId="@item.CanId">Delete</a>
+                @Html.DisplayFor(modelItem => item.Photo)
+            </td>
+            <td>
+                <a  class="btn btn-block btn-light" asp-action="VoteFor" asp-route-catId="@ViewBag.CatId" asp-route-canId="@item.CanId">Vote For</a> 
             </td>
         </tr>
 }

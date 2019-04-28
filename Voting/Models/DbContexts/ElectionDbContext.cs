@@ -15,6 +15,6 @@ namespace Voting.Models.DbContexts
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Votes> Votes { get; set; }
-
+        public DbSet<AlreadyVoted> AlreadyVoted { get; set; }
     }
 }

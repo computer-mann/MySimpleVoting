@@ -9,7 +9,7 @@ namespace Voting.Models
     public class Candidate
     {
         [Key]
-        public int Id { get; set; }
+        public int CanId { get; set; }
         [Timestamp]
         public byte[] TimeStamp { get; set; }
         [MaxLength(20),DataType(DataType.Text),Display(Name ="Candidate Name")]

@@ -23,9 +23,16 @@
            @ViewBag.NoOfCandidates
         </dd>
     </dl>
-    <a asp-action="AddCandidatesToCategory" asp-route-id="@Model.Id">Add Candidates To Category</a>
+    <h2>
+        <a class="btn btn-dark" asp-action="AddCandidatesToCategory" asp-route-catId="@Model.CatId">Add Candidates To Category</a>
+    </h2>
+        <a asp-action="EditCategory" asp-route-catId="@Model.CatId">Edit</a>
+        <a asp-action="List">Back to List</a>
 </div>
+
 <div>
-    <a asp-action="EditCategory" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="List">Back to List</a>
+</div>
+<br /><hr />
+<div>
+  @await Component.InvokeAsync("CandidateInCategory",new { catId=Model.CatId})
 </div>

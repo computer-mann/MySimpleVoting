@@ -1,7 +1,30 @@
-﻿
+﻿@model IEnumerable<Voting.Models.Category>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<button disabled class="btn btn-lg btn-outline-info">Click On A Category to Show And Vote For Candidates</button>
+<br /><br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Vote" asp-route-catId="@item.CatId">@item.CategoryName</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<br />
+

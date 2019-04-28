@@ -38,18 +38,18 @@ namespace Voting.Controllers
             return RedirectToAction(nameof(List));
         }
         [HttpGet]
-        public IActionResult EditCandidate(int? id)
+        public IActionResult EditCandidate(int? canId)
         {
-            if (id == null) return NotFound();
-            var can = dbContext.Candidates.Find(id);
+            if (canId == null) return NotFound();
+            var can = dbContext.Candidates.Find(canId);
             if (can == null) return NotFound();
 
             return View(can);
         }
         [HttpPost]
-        public async Task<IActionResult> EditCandidate(Candidate candidate,int id)
+        public async Task<IActionResult> EditCandidate(Candidate candidate,int canId)
         {
-            var can =await dbContext.Candidates.FindAsync(id);
+            var can =await dbContext.Candidates.FindAsync(canId);
             can.CandidateName = candidate.CandidateName;
             can.Year = candidate.Year;
          //   can.Photo = candidate.Photo;
@@ -59,26 +59,31 @@ namespace Voting.Controllers
             return RedirectToAction(nameof(List));
         }
         [HttpGet]
-        public IActionResult DeleteCandidate(int? id)
+        public IActionResult DeleteCandidate(int? canId)
         {
-            if (id == null) return RedirectToAction("List");
-            var can = dbContext.Candidates.Find(id);
+            if (canId == null) return RedirectToAction("List");
+            var can = dbContext.Candidates.Find(canId);
             if (can == null) return NotFound();
             return View(can);
         }
         [HttpPost]
-        public IActionResult DeleteCandidate(Candidate can)
-        {            
+        public IActionResult DeleteCandidate(Candidate cannId)
+        {
+            if (cannId == null) return NotFound();
+
+            var can = dbContext.Candidates.Find(cannId.CanId);
+            if (can == null) return RedirectToAction("List");
+
             dbContext.Candidates.Remove(can);
             dbContext.SaveChanges();
             return RedirectToAction("List");
         }
         [HttpGet]
-        public IActionResult Details(int? id)
+        public IActionResult Details(int? canId)
         {
-            if (id == null) return RedirectToAction(nameof(List));
+            if (canId == null) return RedirectToAction(nameof(List));
 
-            var can = dbContext.Candidates.Find(id);
+            var can = dbContext.Candidates.Find(canId);
             return View(can);
         }
     }

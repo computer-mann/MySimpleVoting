@@ -9,7 +9,7 @@ using Voting.Models.DbContexts;
 
 namespace Voting.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("admin/[controller]/[action]")]
     public class CategoriesController : Controller
     {
@@ -29,7 +29,7 @@ namespace Voting.Controllers
             if (ModelState.IsValid)
             {
                 await electionDb.Categories.AddAsync(new Category() { CategoryName = category.CategoryName });
-               await electionDb.SaveChangesAsync();
+                await electionDb.SaveChangesAsync();
             }
             return RedirectToAction(nameof(List));
         }
@@ -40,44 +40,55 @@ namespace Voting.Controllers
             return View(cats);
         }
         [HttpGet()]
-        public IActionResult EditCategory(int id)
+        public IActionResult EditCategory(int catId)
         {
-            var cat = electionDb.Categories.Single(b => b.Id == id);
+            var cat = electionDb.Categories.Single(b => b.CatId == catId);
             return View(cat);
         }
         [HttpPost]
-        public IActionResult EditCategory(Category category,int id)
+        public IActionResult EditCategory(Category category, int catId)
         {
-            var can = electionDb.Categories.Find(id);
+            var can = electionDb.Categories.Find(catId);
             can.CategoryName = category.CategoryName;
             electionDb.Categories.Update(can);
             electionDb.SaveChanges();
             return RedirectToAction(nameof(List));
         }
         [HttpGet]
-        public ViewResult Details(int id)
+        public ViewResult Details(int catId)
         {
-            var can = electionDb.Categories.Single(b => b.Id == id);
-            ViewBag.NoOfCandidates = electionDb.Candidates.Where(p => p.Category.Id == can.Id).Count();
+            var cat = electionDb.Categories.Single(b => b.CatId == catId);
+            ViewBag.NoOfCandidates = electionDb.Candidates.Where(p => p.Category.CatId == cat.CatId).Count();
+            return View(cat);
+        }
+        [HttpGet]
+        public IActionResult AddCandidatesToCategory(int? catId)
+        {
+            if (catId == null) return NotFound();
+            var can = electionDb.Candidates.Where(p => p.Category.CatId == null).ToList();
+            ViewBag.CName = electionDb.Categories.Find(catId).CategoryName;
+            ViewBag.CatId = catId.Value;
             return View(can);
         }
         [HttpGet]
-        public async Task<IActionResult> AddCandidatesToCategory()
+        public IActionResult Confirm(int? canId,int catId)
         {
-            var can = electionDb.Candidates.Where(p => p.Category.Id == null).ToList();
+            if (canId == null) return NotFound();
+            ViewBag.CatId = catId;
+            var can = electionDb.Candidates.Find(canId.Value);
             return View(can);
         }
         [HttpPost]
-        public async Task<IActionResult> AddCandidatesToCategory(int? id,IEnumerable<Candidate> candidates)
+        public async Task<IActionResult> Confirm(int? catId,Candidate candidate)
         {
-            if (id == null) return NotFound();
-            foreach(var can in candidates)
-            {
-                can.Category.Id = id.Value;
-            }
-            electionDb.Candidates.UpdateRange(candidates);
+            var cand = electionDb.Candidates.Find(candidate.CanId);
+            if (catId == null) return NotFound();
+            var cat = electionDb.Categories.Find(catId.Value);
+            if (cat == null) return NotFound();
+            cand.Category = cat;
+            electionDb.Candidates.Update(cand);
             await electionDb.SaveChangesAsync();
-            return RedirectToAction(nameof(Details));
+            return RedirectToAction(nameof(Details),new { catId=catId.Value});
         }
     }
 }
