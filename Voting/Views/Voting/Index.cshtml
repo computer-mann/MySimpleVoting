@@ -1,30 +1,27 @@
-﻿@model IEnumerable<Voting.Models.Category>
+﻿@model Voting.Models.ViewModels.NumberOfCategoriesViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vote";
 }
-
-<button disabled class="btn btn-lg btn-outline-info">Click On A Category to Show And Vote For Candidates</button>
+@section CSS{
+    <link href="~/css/votingIndex.css" rel="stylesheet" />
+}
+<button disabled class="btn btn-lg btn-outline-info">Choose Your Candidates</button>
 <br /><br />
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <a asp-action="Vote" asp-route-catId="@item.CatId">@item.CategoryName</a>
-                </td>
-            </tr>
-        }
-    </tbody>
+<form asp-controller="Voting" asp-action="VoteFor" method="post">
+    @for (int i = 1; i <= Model.NoOfCategories; i++)
+    {
+    <div>
+        <input type="hidden" name="CatId" value="@i" />
+        @await Component.InvokeAsync("VoteForCandidatesInCategory", new { catId = i })
+        <hr /><br /><br />
 
-</table>
+    </div>
+    }
+    <input type="submit" value="Submit" class="btn btn-lg btn-dark"/>
+</form>
 <br />
 
+@section Scripts{
+    <script src="~/js/votingIndex.js" asp-append-version="true"></script>
+}

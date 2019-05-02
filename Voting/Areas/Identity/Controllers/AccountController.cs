@@ -51,14 +51,17 @@ namespace Voting.Areas.Identity.Controllers
                     if (result.Succeeded)
                     {
                         return Redirect("~/voting/index");
+
+                    }                  
                      
-                    }
                 }
                 else
                 {
+                    ModelState.AddModelError("", "Incorrect StudentId");
                     return View(model);
                 }
             }
+            ModelState.AddModelError("", "Invalid Username/Password");
             return View(model);
         }
         public IActionResult Logout()

@@ -1,4 +1,4 @@
-﻿@model Voting.Models.Candidate
+﻿@model Voting.Models.ViewModels.AddCandidateViewModel
 @{
     ViewData["Title"] = "CreateCandidate";
 }
@@ -9,10 +9,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateCandidate" method="post">
-            <div >
+        <form asp-action="CreateCandidate" method="post" enctype="multipart/form-data">
+            <div class="form-group">
                 <label asp-for="CandidateName" class="control-label"></label>
-                <input asp-for="CandidateName" class="form-control"/>
+                <input asp-for="CandidateName" class="form-control" />
+            </div><br />
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control-file" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

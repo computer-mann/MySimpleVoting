@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Voting.Models.Votes>
+
+@{
+    ViewData["Title"] = "Exiting";
+}
+
+<h1>You vote for</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Candidate.CandidateName)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Candidate.CandidateName)
+            </td>
+        </tr>
+}
+        
+    </tbody>
+</table>
+<h3><a class="btn-link" asp-area="" asp-controller="Home" asp-action="Index">Click Here When Done</a></h3>

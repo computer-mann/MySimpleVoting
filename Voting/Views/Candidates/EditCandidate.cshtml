@@ -1,4 +1,4 @@
-﻿@model Voting.Models.Candidate
+﻿@model Voting.Models.ViewModels.EditCandidateViewModel
 
 @{
     ViewData["Title"] = "EditCandidate";
@@ -10,18 +10,17 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditCandidate" method="post">
+        <form asp-action="EditCandidate" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CanId" />
+            <input type="hidden" name="canId" value="@ViewBag.CanId"/>
             <div class="form-group">
                 <label asp-for="CandidateName" class="control-label"></label>
                 <input asp-for="CandidateName" class="form-control" />
                 <span asp-validation-for="CandidateName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
-                <input asp-for="Year" class="form-control" />
-                <span asp-validation-for="Year" class="text-danger"></span>
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control-file" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

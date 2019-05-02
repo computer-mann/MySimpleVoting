@@ -87,6 +87,10 @@ namespace Voting.Controllers
             if (cat == null) return NotFound();
             cand.Category = cat;
             electionDb.Candidates.Update(cand);
+           await electionDb.Votes.AddAsync(new Votes()
+            {
+               Candidate=cand,Category=cat,VoteCount=0
+            });
             await electionDb.SaveChangesAsync();
             return RedirectToAction(nameof(Details),new { catId=catId.Value});
         }

@@ -17,7 +17,7 @@ namespace Voting.Controllers.Components
         }
         public async Task<IViewComponentResult> InvokeAsync(int? catId)
         {
-            var cans = electionDb.Candidates.Where(p => p.Category.CatId == catId).ToList();
+            var cans =electionDb.Candidates.Where(p => p.Category.CatId == catId).ToList();
             return View(cans);
         }
     }
