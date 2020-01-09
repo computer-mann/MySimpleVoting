@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Voting.Models.Category>
+
+<h3>Categories List</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <a asp-action="EditCategory" asp-controller="Categories" asp-route-catId="@item.CatId">Edit</a> |
+                <a asp-action="Details" asp-controller="Categories" asp-route-catId="@item.CatId">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

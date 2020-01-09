@@ -42,7 +42,6 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Voting" asp-action="Index">Voting</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -57,13 +56,26 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="List">Categories</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Result" asp-action="Index">Result</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Voters" asp-action="ListVoters">Voters</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Election" asp-action="List">Election</a>
+                            </li>
                         }
-                        <li class="nav-item float-right">
-                            @if (User.Identity.IsAuthenticated)
-                            {
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item float-right">
                                 <a class="nav-link text-info" asp-area="Identity" asp-controller="Account" asp-action="Logout">Sign Out</a>
-                            }
-                        </li>
+                            </li>
+                        }
+
+
                     </ul>
                 </div>
             </div>
@@ -79,6 +91,7 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2019 - Voting
+            <h5><a class="btn btn-lg" asp-area="Identity" asp-controller="Admins" asp-action="AdminLogin">Admin</a></h5>
         </div>
     </footer>
 

@@ -15,5 +15,6 @@ namespace Voting.Models
         public List<Candidate> Candidates { get; set; }
         [Timestamp]
         public byte[] TimeSamp { get; set; }
+        public ElectionState Election { get; set; }
     }
 }

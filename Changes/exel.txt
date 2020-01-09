@@ -1,0 +1,30 @@
+ row.CreateCell(0).SetCellValue("Election Code");
+                row.CreateCell(1).SetCellValue("Description");
+                row.CreateCell(2).SetCellValue("Category");
+                row.CreateCell(3).SetCellValue("Candidate Name");
+                row.CreateCell(4).SetCellValue("Total Votes");
+                row.CreateCell(5).SetCellValue("Position");
+
+                row = excelSheet.CreateRow(1);
+                row.CreateCell(0).SetCellValue(1);
+                row.CreateCell(1).SetCellValue("Kane Williamson");
+                row.CreateCell(2).SetCellValue(29);
+                row.CreateCell(3).SetCellValue(29);
+                row.CreateCell(4).SetCellValue(29);
+                row.CreateCell(5).SetCellValue(29);
+
+                row = excelSheet.CreateRow(2);
+                row.CreateCell(0).SetCellValue(2);
+                row.CreateCell(1).SetCellValue("Martin Guptil");
+                row.CreateCell(2).SetCellValue(33);
+                row.CreateCell(3).SetCellValue(29);
+                row.CreateCell(4).SetCellValue(29);
+                row.CreateCell(5).SetCellValue(29);
+
+                row = excelSheet.CreateRow(3);
+                row.CreateCell(0).SetCellValue(3);
+                row.CreateCell(1).SetCellValue("Colin Munro");
+                row.CreateCell(2).SetCellValue(23);
+                row.CreateCell(3).SetCellValue(29);
+                row.CreateCell(4).SetCellValue(29);
+                row.CreateCell(5).SetCellValue(29);

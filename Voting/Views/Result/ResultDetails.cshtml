@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Voting.Models.ViewModels.CandidateVoteCount>
+
+@{
+    ViewData["Title"] = "Result Details";
+    var back = "<-";
+}
+
+<h1>Result Details For @ViewBag.CatName</h1>
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="~/@item.Photo" width="400" height="300" alt="No Pic" />
+                <div class="card-body">
+                    <div class="card-title">
+                        <table class="table">                            
+                            <tbody>
+                            <tr>
+                             <td><b>Name:</b></td>   
+                            <td>@item.CandidateName</td>
+                            </tr>
+                            <tr>
+                                <td><b>Votes:</b></td>
+                            <td>@item.NumberOfVotes</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<h1>
+    <a asp-action="Index" asp-controller="Result" class="btn btn-lg btn-dark">@back Back</a>
+</h1>

@@ -1,19 +1,19 @@
-﻿@model IEnumerable<Voting.Models.Votes>
+﻿@model List<Voting.Models.Votes>
 
 @{
     ViewData["Title"] = "Exiting";
 }
 
-<h1>You vote for</h1>
+<h1>You voted for</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Category.CategoryName)
+                Category Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Candidate.CandidateName)
+                Candidate 
             </th>
             
         </tr>

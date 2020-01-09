@@ -8,8 +8,8 @@ namespace Voting.Models
 {
     public class Votes
     {
-        [Key]
-        public int Id { get; set; }
+        public int CategoryId { get; set; }
+        public int CandidateId { get; set; }
         public Category Category { get; set; }
         public Candidate Candidate { get; set; }
         public int VoteCount { get; set; }

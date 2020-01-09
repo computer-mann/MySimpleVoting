@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Voting.Models.Candidate>
+
+@{
+    ViewData["Title"] = "Vote";
+}
+@section CSS{
+    <link href="~/css/votingIndex.css" rel="stylesheet" />
+}
+<button disabled class="btn btn-lg btn-outline-info">Choose Your Candidates</button>
+<br /><br />
+      <p>
+          <a class="navbar-brand btn btn-dark text-white" asp-area="" asp-controller="Voting" asp-action="Index">Click to go back</a>
+      </p>
+      <h1>@ViewBag.CategoryNameFull</h1>
+<form asp-controller="Voting" asp-route-guid="@ViewBag.Guid" asp-action="VoteFor" method="post">
+    <div>
+        <input type="hidden" name="CatId" value="@ViewBag.Cat" />
+        <div class="container-fluid">
+            <div class="row">
+                <input type="hidden" id="@ViewBag.CategoryName" name="CanId" value="" />
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div id="@item.Category.CategoryName.Split(' ').Last()">
+                                <img class="card-img-top" src="~/@item.Photo" alt="No Pic" width="400" height="300"/>
+                                <img class="card-img-overlay @item.CandidateName" height="100" src="~/img/icon-ok.gif" hidden />
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">@item.CandidateName</h4>
+                                <p> </p>
+                                <button class="btn btn-outline-secondary @item.CandidateName">Next</button>
+                                <script>
+                        $(function () {
+                            $('button').filter('.@item.CandidateName').click(function () {
+                                event.preventDefault();
+                                $('#@item.Category.CategoryName.Split(' ').Last()>img').filter('.card-img-overlay').attr("hidden", "");
+                                $('img').filter('.@item.CandidateName').removeAttr("hidden");
+                                $('input').filter('#@ViewBag.CategoryName').val("@item.CanId");
+                            })
+
+                        });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <hr /><br /><br />
+    </div>
+    <input type="submit" value="Confirm"  id="submitBtn" class="btn btn-lg btn-dark" />
+    <script>
+        //$(function () {
+        //    $('#submitBtn').click(function () {
+        //        localStorage.clear();
+        //        localStorage.setItem()
+        //    });
+        //}
+        //);
+    </script>
+</form>
+<br />
+
+@section Scripts{
+    <script src="~/js/votingIndex.js" asp-append-version="true"></script>
+}

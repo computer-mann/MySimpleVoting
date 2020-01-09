@@ -1,0 +1,45 @@
+﻿@model Voting.Models.ElectionState
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateClosed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateClosed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ongoing)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ongoing)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+    <a asp-action="AddCatToElection" asp-route-guid="@Model.Id" class="btn btn-outline-info">Add Categories</a>
+    <a asp-action="Edit" asp-route-guid="@Model.Id" class="btn btn-dark">Edit</a>
+    <div id="showDialog">
+        @await Component.InvokeAsync("CategoriesInElection", new { guid = Model.Id })
+    </div>
+<div>
+    <a asp-action="List">Back to List</a>
+</div>

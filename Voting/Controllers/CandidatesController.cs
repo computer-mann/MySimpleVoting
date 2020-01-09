@@ -37,7 +37,11 @@ namespace Voting.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCandidate([FromForm]AddCandidateViewModel viewModel)
         {
-            var pic =await pictureUpload.UploadAsync(viewModel.Photo);
+            string pic = "";
+            if (viewModel.Photo != null)
+            {
+                 pic = await pictureUpload.UploadAsync(viewModel.Photo);
+            }
             var can = new Candidate()
             {
                 CandidateName = viewModel.CandidateName,

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Voting.Areas.Identity.Data;
 using Voting.Areas.Identity.Models;
 using Voting.Areas.Identity.Models.DbContext;
 using Voting.Infrastructure;
@@ -63,6 +65,8 @@ namespace Voting
             });
 
             services.AddTransient<IPictureUpload, PictureUpload>();
+            services.AddSingleton<IExitingModel, ExitingModel>();
+            services.AddMemoryCache();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -73,11 +77,12 @@ namespace Voting
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+               // app.UseExceptionHandler("/Home/Error");
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+                
             }
 
             app.UseStaticFiles();
@@ -98,7 +103,7 @@ namespace Voting
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             // Task.Run(() => SeedData.InitializeStudents(app.ApplicationServices.CreateScope().ServiceProvider));
-            //  Task.Run(() => SeedData.InitializeStudentRoles(app.ApplicationServices.CreateScope().ServiceProvider));
+            // Task.Run(() => SeedData.InitializeStudentRoles(app.ApplicationServices.CreateScope().ServiceProvider));
             //  Task.Run(() => SeedData.InitializeAdmins(app.ApplicationServices.CreateScope().ServiceProvider));
             //Task.Run(() => Voting.Models.Data.SeedData.InitializeVoteParams(app.ApplicationServices.CreateScope().ServiceProvider));
         }

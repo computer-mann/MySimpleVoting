@@ -65,7 +65,9 @@ namespace Voting.Controllers
         public IActionResult AddCandidatesToCategory(int? catId)
         {
             if (catId == null) return NotFound();
+#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
             var can = electionDb.Candidates.Where(p => p.Category.CatId == null).ToList();
+#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
             ViewBag.CName = electionDb.Categories.Find(catId).CategoryName;
             ViewBag.CatId = catId.Value;
             return View(can);
@@ -93,6 +95,14 @@ namespace Voting.Controllers
             });
             await electionDb.SaveChangesAsync();
             return RedirectToAction(nameof(Details),new { catId=catId.Value});
+        }
+        [HttpGet]
+        public IActionResult Delete(int catId)
+        {
+            var cat = electionDb.Categories.Find(catId);
+            electionDb.Categories.Remove(cat);
+            electionDb.SaveChanges();
+            return RedirectToAction(nameof(List));
         }
     }
 }

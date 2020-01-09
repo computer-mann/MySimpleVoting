@@ -19,59 +19,13 @@ namespace Voting.Migrations.Election
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Voting.Areas.Identity.Models.Student", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<string>("Email");
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail");
-
-                    b.Property<string>("NormalizedUserName");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<string>("StudentId");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Student");
-                });
-
             modelBuilder.Entity("Voting.Models.AlreadyVoted", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Student");
 
-                    b.Property<string>("StudentId");
+                    b.Property<Guid>("ElectionId");
 
-                    b.Property<bool>("Voted");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
+                    b.HasKey("Student", "ElectionId");
 
                     b.ToTable("AlreadyVoted");
                 });
@@ -111,24 +65,43 @@ namespace Voting.Migrations.Election
                     b.Property<string>("CategoryName")
                         .HasMaxLength(60);
 
+                    b.Property<Guid?>("ElectionId");
+
                     b.Property<byte[]>("TimeSamp")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("CatId");
 
+                    b.HasIndex("ElectionId");
+
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Voting.Models.ElectionState", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime>("DateClosed");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(30);
+
+                    b.Property<bool>("Ongoing");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Election");
                 });
 
             modelBuilder.Entity("Voting.Models.Votes", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("CategoryId");
 
-                    b.Property<int?>("CandidateCanId");
-
-                    b.Property<int?>("CategoryCatId");
+                    b.Property<int>("CandidateId");
 
                     b.Property<byte[]>("TimeStamp")
                         .IsConcurrencyToken()
@@ -136,20 +109,11 @@ namespace Voting.Migrations.Election
 
                     b.Property<int>("VoteCount");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoryId", "CandidateId");
 
-                    b.HasIndex("CandidateCanId");
-
-                    b.HasIndex("CategoryCatId");
+                    b.HasIndex("CandidateId");
 
                     b.ToTable("Votes");
-                });
-
-            modelBuilder.Entity("Voting.Models.AlreadyVoted", b =>
-                {
-                    b.HasOne("Voting.Areas.Identity.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("Voting.Models.Candidate", b =>
@@ -159,15 +123,24 @@ namespace Voting.Migrations.Election
                         .HasForeignKey("CategoryCatId");
                 });
 
+            modelBuilder.Entity("Voting.Models.Category", b =>
+                {
+                    b.HasOne("Voting.Models.ElectionState", "Election")
+                        .WithMany("Categories")
+                        .HasForeignKey("ElectionId");
+                });
+
             modelBuilder.Entity("Voting.Models.Votes", b =>
                 {
                     b.HasOne("Voting.Models.Candidate", "Candidate")
                         .WithMany()
-                        .HasForeignKey("CandidateCanId");
+                        .HasForeignKey("CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Voting.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryCatId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

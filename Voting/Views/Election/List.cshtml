@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Voting.Models.ElectionState>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>All Elections</h1>
+
+<p>
+    <a asp-action="Add">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateClosed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ongoing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateClosed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ongoing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-guid="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-guid="@item.Id">Details</a> |
+                <a asp-action="Report" asp-route-guid="@item.Id">Report</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Voting.Areas.Identity.Models.Student>
+
+@{
+    ViewData["Title"] = "ListVoters";
+}
+
+<h1>ListVoters</h1>
+
+<p>
+    <a asp-action="AddVoter">Add Voter</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherNames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentId)
+            </th>
+   
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentId)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "EditVoters", new {  username=item.UserName }) |
+                @Html.ActionLink("Details", "VoterDetails", new { username = item.UserName }) |
+                @Html.ActionLink("Delete", "DeleteVoter", new { username = item.UserName })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

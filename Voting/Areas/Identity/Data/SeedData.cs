@@ -14,11 +14,16 @@ namespace Voting.Areas.Identity.Data
             var userManager = provider.GetRequiredService<UserManager<Student>>();
             var students = new List<Student>()
             {
-                new Student(){Email="d@d.com",UserName="dadjeifrempah",StudentId="20171717"},
-                new Student(){Email="o@q.com",UserName="ogyimah",StudentId="20191756"},
-                new Student(){Email="p@h.com",UserName="phnunoo",StudentId="20426845"},
-                new Student(){Email="v@n.com",UserName="vnunoo",StudentId="20200524"},
-                new Student(){Email="w@q.com",UserName="wquarshie",StudentId="20131226"},
+                //new Student(){Email="d@d.com",UserName="dadjeifrempah",StudentId="20171717"},
+                //new Student(){Email="o@q.com",UserName="ogyimah",StudentId="20191756"},
+                //new Student(){Email="p@h.com",UserName="phnunoo",StudentId="20426845"},
+                //new Student(){Email="v@n.com",UserName="vnunoo",StudentId="20200524"},
+                //new Student(){Email="w@q.com",UserName="wquarshie",StudentId="20131226"},
+                  new Student(){Email="a@a.com",UserName="gifty1",StudentId="20181717"},
+                    new Student(){Email="b@d.com",UserName="joseph3",StudentId="20171709"},
+                      new Student(){Email="d@das.com",UserName="cynthia67",StudentId="31871717"},
+                        new Student(){Email="d@push.com",UserName="veraashy2",StudentId="20171717"},
+                          new Student(){Email="d@puxes.com",UserName="thedorah67",StudentId="20171717"}
             };
             foreach(var student in students)
             {
@@ -32,13 +37,18 @@ namespace Voting.Areas.Identity.Data
             var userManager = serviceProvider.GetRequiredService<UserManager<Student>>();
             var students = new List<Student>()
             {
-                new Student(){Email="d@d.com",UserName="dadjeifrempah",StudentId="20171717"},
-                new Student(){Email="o@q.com",UserName="ogyimah",StudentId="20191756"},
-                new Student(){Email="p@h.com",UserName="phnunoo",StudentId="20426845"},
-                new Student(){Email="v@n.com",UserName="vnunoo",StudentId="20200524"},
-                new Student(){Email="w@q.com",UserName="wquarshie",StudentId="20131226"},
+                //new Student(){Email="d@d.com",UserName="dadjeifrempah",StudentId="20171717"},
+                //new Student(){Email="o@q.com",UserName="ogyimah",StudentId="20191756"},
+                //new Student(){Email="p@h.com",UserName="phnunoo",StudentId="20426845"},
+                //new Student(){Email="v@n.com",UserName="vnunoo",StudentId="20200524"},
+                //new Student(){Email="w@q.com",UserName="wquarshie",StudentId="20131226"},
+                 new Student(){Email="a@a.com",UserName="gifty1",StudentId="20181717"},
+                    new Student(){Email="b@d.com",UserName="joseph3",StudentId="20171709"},
+                      new Student(){Email="d@das.com",UserName="cynthia67",StudentId="31871717"},
+                        new Student(){Email="d@push.com",UserName="veraashy2",StudentId="20171717"},
+                          new Student(){Email="d@puxes.com",UserName="thedorah67",StudentId="20171717"}
             };
-            await roleManager.CreateAsync(role);
+            //await roleManager.CreateAsync(role);
             foreach (var stu in students)
             {
                 var user =await userManager.FindByEmailAsync(stu.Email);

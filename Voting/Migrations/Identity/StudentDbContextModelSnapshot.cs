@@ -144,6 +144,14 @@ namespace Voting.Migrations.Identity
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(35);
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(35);
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -153,6 +161,9 @@ namespace Voting.Migrations.Identity
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("OtherNames")
+                        .HasMaxLength(35);
 
                     b.Property<string>("PasswordHash");
 
